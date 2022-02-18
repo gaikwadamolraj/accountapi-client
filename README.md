@@ -164,6 +164,12 @@ To run this sample app, you'll need:
 
 ### Future plan
 
+:ballot_box_with_check: CI/CD
+
+:ballot_box_with_check: Contract testing(Pact)
+
+:ballot_box_with_check: Authentication
+
 :ballot_box_with_check: Authentication
 
 :ballot_box_with_check: List api
