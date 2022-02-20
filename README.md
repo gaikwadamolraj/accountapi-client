@@ -68,87 +68,126 @@ make securityscan
 
 ## This go client is created for accountapi.
 
-To run this sample app, you'll need:
+To run this app, you'll need:
 
 - Go 1.17
 
-### You can run this application on your local with diff below options
-## Commands ##
+## How to use  ##
+ - Instructions
+Use of this client library access account API, which support Create, Fetch and delete methood. Please refer to the
+[Form3 documentation](http://api-docs.form3.tech/api.html#organisation-accounts) for information for each API deatils
 
-- ## Application Lifecycle
+   #### Set API host using env variable
+   ```sh
+    API_HOST
+    // ex: export API_HOST=http://localhost:8080
+   ```
+   #### Import below modules
+   ```sh
+    github.com/gaikwadamolraj/form3
+    github.com/gaikwadamolraj/form3/model
+	github.com/gaikwadamolraj/form3/utils
+   ```
 
-    ### Install modules
+   #### Sample Module created with Set and Get methods
+   ```sh
+    accountId := utils.GetUUID()
+	version := 0
 
-    ```sh
-    make goinstall
-    ```
+	accountData := model.GetAccountModel()
 
-    ### Build application
+	accountData.SetAccountID(accountId)
+	accountData.SetOrgId(utils.GetUUID())
+	accountData.SetCountry("GB")
+	accountData.SetStatus("confirmed")
 
-    ```sh
-    make goprod
-    ```
+    // Create and fetch response will be 
+    // type AccountData struct
+   ```
 
-    ### Start application in development
-    - ### Start dependency containers
-        ```sh
-        make dcup
-        ```
-    - ### Run local 
-        ```sh
-        make godev
-        ```
-- ## Testing Lifecycle
+   #### Create
+   ```sh
+    response, err := form3.Create(accountData)
+     // err is any errors found
+     // Sucess will result the of AccountData module
+     // You can use GET as like createResp.GetAccountID()
+   ```
 
-    ### Unit tests
+   #### Fetch
+   ```sh
+    response, err := form3.FetchById(accountId)
+     // err is any errors found
+     // Sucess will result the of AccountData module
+   ```
 
-    ```sh
-    make gotest
-    ```
+   #### Delete
+   ```sh
+    err = form3.DeleteByIdAndVer(accountId, version)
+    // If any errors then err
+    // If no reponse means your account deleted
+   ```
 
-    ### BDD tests(Cucumber)
-
-    ```sh
-    make gobdd
-    ```
-
-    ### Code coverage
-
-    ```sh
-    make gocodecov
-    ```
-
-    ### Security Scan
-
-    ```sh
-    make gosecurityscan
-    ```
-- ## Docker Lifecycle
-
-    ### Docker Compose up
-
+## Run example application in development
+- ### Start dependency containers
     ```sh
     make dcup
     ```
-
-    ### Docker Compose stop
-
+- ### Run local sample example
     ```sh
-    make dcstop
+    make godev
     ```
+## Application Lifecycle
 
-    ### Docker Compose down
+   - ### Install modules & build
+     ```sh
+      make goinstall
+      ```
 
-    ```sh
-    make dcdown
-    ```
+   - ### Build application
+     ```sh
+     make goprod
+     ```
+## Testing Lifecycle
+   > ### Make sure your docker compose should up before running below commands
 
-    ### Docker compose for test application
+   - ### Unit tests
+     ```sh
+     make gotest
+     ```
+   - ### BDD tests(Cucumber)
+     ```sh
+     make gobdd
+     ```
 
-    ```sh
-    make dctestcompose
-    ```
-### Features
+   - ### Code coverage
+     ```sh
+     make gocodecov
+     ```
+
+   - ### Security Scan
+     ```sh
+      make gosecurityscan
+     ```
+## Docker Lifecycle
+   - ### Docker Compose ups
+     ```sh
+      make dcup
+     ```
+
+   - ### Docker Compose stop
+     ```sh
+      make dcstop
+     ```
+
+   - ### Docker Compose down
+     ```sh
+     make dcdown
+     ```
+   - ### Docker compose for test application
+     ```sh
+      make dctestcompose
+     ```
+## Features
 
 :white_check_mark: Containerize Application Using Docker
 
@@ -186,5 +225,6 @@ To run this sample app, you'll need:
 
 
 ## Author
+**I am new in GO**
 
-- [Amol Gaikwad](https://github.com/gaikwadamolraj)
+[Amol Gaikwad - Linkedin](https://www.linkedin.com/in/gaikwadamolraj)
