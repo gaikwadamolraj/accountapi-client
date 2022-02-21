@@ -1,0 +1,31 @@
+FROM golang:1.17-alpine as builder
+
+WORKDIR /go/src/github.com/gaikwadamolraj/form3/
+
+# Fetch dependencies
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Build
+COPY . ./
+
+CMD GOOS=linux CGO_ENABLED=0 go test ./...  -coverprofile=coverage.out
+
+# # Build Go Binary
+# RUN set -ex; \
+#     CGO_ENABLED=0 GOOS=linux go build ./*.go;
+
+# # Create final image
+# FROM alpine:latest
+
+# # Install Root Ceritifcates
+# RUN set -ex; \
+#     apk update; \
+#     apk add --no-cache \
+#      ca-certificates
+
+# WORKDIR /opt/
+
+# COPY --from=builder /go/src/github.com/gaikwadamolraj/form3/form3-client .
+
+# CMD /opt/form3-client

@@ -1,0 +1,28 @@
+{
+  "consumer": {
+    "name": "AccountApiClient"
+  },
+  "provider": {
+    "name": "AccountApi"
+  },
+  "interactions": [
+    {
+      "description": "A GET request for Account with id ad27e265-9605-4b4b-a0e5-3003ea9cc99c",
+      "providerState": "Accound id  ad27e265-9605-4b4b-a0e5-3003ea9cc99c is not available",
+      "request": {
+        "method": "GET",
+        "path": "/v1/organisation/accounts/ad27e265-9605-4b4b-a0e5-3003ea9cc99c"
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

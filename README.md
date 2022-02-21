@@ -158,7 +158,10 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
      make gobdd
      ```
-
+  - ### Pact testing
+     ```sh
+     make gopact
+     ```
    - ### Code coverage
      ```sh
      make gocodecov
@@ -193,7 +196,9 @@ Use of this client library access account API, which support Create, Fetch and d
 
 :white_check_mark: Unit tested
 
-:white_check_mark: Integration testing
+:white_check_mark: Integration testing(BDD)
+
+:white_check_mark: Contract testing(Pact)
 
 :white_check_mark: Security scan
 
@@ -204,8 +209,6 @@ Use of this client library access account API, which support Create, Fetch and d
 ### Future plan
 
 :ballot_box_with_check: CI/CD
-
-:ballot_box_with_check: Contract testing(Pact)
 
 :ballot_box_with_check: Authentication
 
@@ -225,6 +228,6 @@ Use of this client library access account API, which support Create, Fetch and d
 
 
 ## Author
-**I am new in GO**
-
 [Amol Gaikwad - Linkedin](https://www.linkedin.com/in/gaikwadamolraj)
+
+**I am new in GO** (Learnt basic go lang firstly and then completed assignment. Still learning process is going on)

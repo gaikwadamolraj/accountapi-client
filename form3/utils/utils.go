@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gaikwadamolraj/form3/constants"
 	"github.com/google/uuid"
@@ -12,7 +13,7 @@ func GetUUID() string {
 }
 
 func GetAccountUrl(accountId string, version string) string {
-	path := constants.BaseUrl + constants.ApiVersion + constants.OrgAccountRoute
+	path := os.Getenv("API_HOST") + constants.ApiVersion + constants.OrgAccountRoute
 	if version != "" && accountId != "" {
 		path += "/" + accountId + fmt.Sprintf("?version=%s", version)
 	} else if accountId != "" {

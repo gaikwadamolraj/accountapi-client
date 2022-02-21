@@ -14,7 +14,10 @@ gotest:
 	go test ./...  -coverprofile=coverage.out
 
 gobdd:
-	sh cucumber.sh
+	cd integration && godog
+
+gopact:
+	go test -v ./contract-testing/pact_test.go
 
 # Scan
 gosecurityscan:
