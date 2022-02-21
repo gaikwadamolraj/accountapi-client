@@ -7,6 +7,218 @@
   },
   "interactions": [
     {
+      "description": "Create account for Account with id ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+      "providerState": "Create new account with id ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+      "request": {
+        "method": "POST",
+        "path": "/v1/organisation/accounts"
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+        },
+        "body": {
+          "data": {
+            "attributes": {
+              "account_classification": "string",
+              "account_matching_opt_out": true,
+              "account_number": "string",
+              "alternative_names": [
+                "string"
+              ],
+              "bank_id": "string",
+              "bank_id_code": "string",
+              "base_currency": "string",
+              "bic": "string",
+              "country": "string",
+              "iban": "string",
+              "joint_account": true,
+              "name": [
+                "string"
+              ],
+              "secondary_identification": "string",
+              "status": "pending",
+              "switched": true
+            },
+            "id": "ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+            "organisation_id": "ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+            "type": "accounts",
+            "version": 1
+          }
+        },
+        "matchingRules": {
+          "$.body.data.attributes.account_classification": {
+            "match": "type"
+          },
+          "$.body.data.attributes.account_matching_opt_out": {
+            "match": "type"
+          },
+          "$.body.data.attributes.account_number": {
+            "match": "type"
+          },
+          "$.body.data.attributes.alternative_names": {
+            "min": 1
+          },
+          "$.body.data.attributes.alternative_names[*].*": {
+            "match": "type"
+          },
+          "$.body.data.attributes.alternative_names[*]": {
+            "match": "type"
+          },
+          "$.body.data.attributes.bank_id": {
+            "match": "type"
+          },
+          "$.body.data.attributes.bank_id_code": {
+            "match": "type"
+          },
+          "$.body.data.attributes.base_currency": {
+            "match": "type"
+          },
+          "$.body.data.attributes.bic": {
+            "match": "type"
+          },
+          "$.body.data.attributes.country": {
+            "match": "type"
+          },
+          "$.body.data.attributes.iban": {
+            "match": "type"
+          },
+          "$.body.data.attributes.joint_account": {
+            "match": "type"
+          },
+          "$.body.data.attributes.name": {
+            "min": 1
+          },
+          "$.body.data.attributes.name[*].*": {
+            "match": "type"
+          },
+          "$.body.data.attributes.name[*]": {
+            "match": "type"
+          },
+          "$.body.data.attributes.secondary_identification": {
+            "match": "type"
+          },
+          "$.body.data.attributes.status": {
+            "match": "type"
+          },
+          "$.body.data.attributes.switched": {
+            "match": "type"
+          },
+          "$.body.data.id": {
+            "match": "type"
+          },
+          "$.body.data.organisation_id": {
+            "match": "type"
+          },
+          "$.body.data.type": {
+            "match": "type"
+          },
+          "$.body.data.version": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "Create account for two times with duplicate error",
+      "providerState": "Create new account two times with duplicate error",
+      "request": {
+        "method": "POST",
+        "path": "/v1/organisation/accounts"
+      },
+      "response": {
+        "status": 409,
+        "headers": {
+        },
+        "body": {
+          "error_message": "Account cannot be created as it violates a duplicate constraint"
+        },
+        "matchingRules": {
+          "$.body.error_message": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "Create account for Account with id 123",
+      "providerState": "Create new account with id 123",
+      "request": {
+        "method": "POST",
+        "path": "/v1/organisation/accounts"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+        },
+        "body": {
+          "error_message": "id in body must be of type uuid"
+        },
+        "matchingRules": {
+          "$.body.error_message": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "Create account for Account with status Pending",
+      "providerState": "Create new account with status as Pending",
+      "request": {
+        "method": "POST",
+        "path": "/v1/organisation/accounts"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+        },
+        "body": {
+          "error_message": "status in body should be one of [pending confirmed failed]"
+        },
+        "matchingRules": {
+          "$.body.error_message": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "Delete account with inavalid version for id ad27e265-9605-4b4b-a0e5-3003ea9cc9ac",
+      "providerState": "Delete account with inavalid version for id ad27e265-9605-4b4b-a0e5-3003ea9cc9ac",
+      "request": {
+        "method": "DELETE",
+        "path": "/v1/organisation/accounts/ad27e265-9605-4b4b-a0e5-3003ea9cc9ac",
+        "query": "version=123"
+      },
+      "response": {
+        "status": 409,
+        "headers": {
+        },
+        "body": {
+          "error_message": "invalid version"
+        },
+        "matchingRules": {
+          "$.body.error_message": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "Delete account with  id ad27e265-9605-4b4b-a0e5-3003ea9cc9mc",
+      "providerState": "Delete account with  id ad27e265-9605-4b4b-a0e5-3003ea9cc9mc",
+      "request": {
+        "method": "DELETE",
+        "path": "/v1/organisation/accounts/ad27e265-9605-4b4b-a0e5-3003ea9cc9mc",
+        "query": "version=123"
+      },
+      "response": {
+        "status": 204,
+        "headers": {
+        }
+      }
+    },
+    {
       "description": "A GET request for Account with id ad27e265-9605-4b4b-a0e5-3003ea9cc99c",
       "providerState": "Accound id  ad27e265-9605-4b4b-a0e5-3003ea9cc99c is not available",
       "request": {
@@ -16,6 +228,119 @@
       "response": {
         "status": 404,
         "headers": {
+        }
+      }
+    },
+    {
+      "description": "A GET request for Account with id ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+      "providerState": "Accound id  ad27e265-9605-4b4b-a0e5-3003ea9cc99a is available",
+      "request": {
+        "method": "GET",
+        "path": "/v1/organisation/accounts/ad27e265-9605-4b4b-a0e5-3003ea9cc99a"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "data": {
+            "attributes": {
+              "account_classification": "string",
+              "account_matching_opt_out": true,
+              "account_number": "string",
+              "alternative_names": [
+                "string"
+              ],
+              "bank_id": "string",
+              "bank_id_code": "string",
+              "base_currency": "string",
+              "bic": "string",
+              "country": "string",
+              "iban": "string",
+              "joint_account": true,
+              "name": [
+                "string"
+              ],
+              "secondary_identification": "string",
+              "status": "pending",
+              "switched": true
+            },
+            "id": "ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+            "organisation_id": "ad27e265-9605-4b4b-a0e5-3003ea9cc99a",
+            "type": "accounts",
+            "version": 1
+          }
+        },
+        "matchingRules": {
+          "$.body.data.attributes.account_classification": {
+            "match": "type"
+          },
+          "$.body.data.attributes.account_matching_opt_out": {
+            "match": "type"
+          },
+          "$.body.data.attributes.account_number": {
+            "match": "type"
+          },
+          "$.body.data.attributes.alternative_names": {
+            "min": 1
+          },
+          "$.body.data.attributes.alternative_names[*].*": {
+            "match": "type"
+          },
+          "$.body.data.attributes.alternative_names[*]": {
+            "match": "type"
+          },
+          "$.body.data.attributes.bank_id": {
+            "match": "type"
+          },
+          "$.body.data.attributes.bank_id_code": {
+            "match": "type"
+          },
+          "$.body.data.attributes.base_currency": {
+            "match": "type"
+          },
+          "$.body.data.attributes.bic": {
+            "match": "type"
+          },
+          "$.body.data.attributes.country": {
+            "match": "type"
+          },
+          "$.body.data.attributes.iban": {
+            "match": "type"
+          },
+          "$.body.data.attributes.joint_account": {
+            "match": "type"
+          },
+          "$.body.data.attributes.name": {
+            "min": 1
+          },
+          "$.body.data.attributes.name[*].*": {
+            "match": "type"
+          },
+          "$.body.data.attributes.name[*]": {
+            "match": "type"
+          },
+          "$.body.data.attributes.secondary_identification": {
+            "match": "type"
+          },
+          "$.body.data.attributes.status": {
+            "match": "type"
+          },
+          "$.body.data.attributes.switched": {
+            "match": "type"
+          },
+          "$.body.data.id": {
+            "match": "type"
+          },
+          "$.body.data.organisation_id": {
+            "match": "type"
+          },
+          "$.body.data.type": {
+            "match": "type"
+          },
+          "$.body.data.version": {
+            "match": "type"
+          }
         }
       }
     }
