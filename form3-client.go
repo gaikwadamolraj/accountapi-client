@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 
 	"github.com/gaikwadamolraj/form3"
 	"github.com/gaikwadamolraj/form3/model"
@@ -46,5 +45,4 @@ func main() {
 		log.Println(fmt.Sprintf("Account with id %s and version \"%d\" got deleted", accountId, version))
 	}
 	log.Println("---------------- Delete --------------------")
-	http.ListenAndServe("localhost:5000", nil)
 }

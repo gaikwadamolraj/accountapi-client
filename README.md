@@ -177,3 +177,14 @@ Use of this client library access account API, which support Create, Fetch and d
 [Amol Gaikwad - Linkedin](https://www.linkedin.com/in/gaikwadamolraj)
 
 **I am new in GO** (Learnt basic go lang firstly and then completed assignment. Still learning process is going on)
+
+## Screenshots
+  > Added test result screenshots in /screenshots folder
+  
+   ![Bdd](https://github.com/gaikwadamolraj/accountapi-client/screenshots/Bdd.png)
+
+   ![CodCov](https://github.com/gaikwadamolraj/accountapi-client/screenshots/Codecov.png)
+
+   ![Pact](https://github.com/gaikwadamolraj/accountapi-client/screenshots/Pact.png)
+
+   ![Security](https://github.com/gaikwadamolraj/accountapi-client/screenshots/Security.png)
