@@ -210,9 +210,7 @@ Use of this client library access account API, which support Create, Fetch and d
 
 :ballot_box_with_check: CI/CD
 
-:ballot_box_with_check: Authentication
-
-:ballot_box_with_check: Authentication
+:ballot_box_with_check: Authentication & Authorisation
 
 :ballot_box_with_check: List api
 
