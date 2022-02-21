@@ -101,10 +101,12 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
      make gobdd
      ```
+     > Need [GODOG](https://github.com/cucumber/godog) set up on local.
   - ### Pact testing
      ```sh
      make gopact
      ```
+     > Need [Pact](https://github.com/pact-foundation/pact-go) set up on local.
    - ### Code coverage
      ```sh
      make gocodecov
@@ -114,6 +116,7 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
       make gosecurityscan
      ```
+     > Need [Gosec](https://github.com/securego/gosec) set up on local.
 ## Docker Lifecycle
    - ### Docker Compose ups
      ```sh
@@ -168,6 +171,8 @@ Use of this client library access account API, which support Create, Fetch and d
 :ballot_box_with_check: Context for godog bdd
 
 :ballot_box_with_check: Audit Trail logs
+
+:ballot_box_with_check: Go routines and channels
 
 ## Author
 [Amol Gaikwad - Linkedin](https://www.linkedin.com/in/gaikwadamolraj)
