@@ -1,0 +1,8 @@
+ Godog - https://github.com/cucumber/godog
+ Gosec - https://github.com/securego/gosec
+ Pact  - https://github.com/pact-foundation/pact-go
+
+ Golang by example - https://golangbyexample.com/struct-json-golang/
+
+ https://kandi.openweaver.com/go/cucumber/godog#Community-Discussions
+ 
