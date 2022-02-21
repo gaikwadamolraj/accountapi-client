@@ -1,7 +1,6 @@
 language: go
 go:
- - 1.16.x
- - main
+ - 1.17.x
 
 script:
- - go test -v ./contract-testing/pact_test.go
+ - go test -v ./contract-testing/pact_test.go # OR make gopact

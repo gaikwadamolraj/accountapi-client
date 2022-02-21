@@ -1,60 +1,3 @@
-<!-- # go-accountapi **Client**
-
-## Required Go version
-```
-1.17.6
-```
-
-## Local setup and run 
-
-
-![Codecov](https://img.shields.io/codecov/c/github/gaikwadamolraj/go-accountapi)
-### Download go packages
-```
-make install
-```
-
-
-### Compose run file to start dependency(accountapi, postgresql, vault)
-```
-make up
-```
-
-### Local run
-```
-make localrun
-```
-## Run Tests 
-
-### Unit tests run
-```
-make test
-```
-
-### Unit tests with coverage
-```
-make testcoverage
-```
-
-### BDD tests(Cucumber)
-```
-make cucumber
-```
-
-### Security scan
-```
-make securityscan
-```
-
-
-## Run Tests with docker-compose
-
-#### Down prev compose if any and run tests with compose
-```
- make down
- make testcompose
-``` -->
-
 <p align="left"> <a href="https://golang.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg" alt="go"  width="320" height="320"/> </a> </p>
 
 # Client for accountapi
@@ -204,11 +147,11 @@ Use of this client library access account API, which support Create, Fetch and d
 
 :white_check_mark: Code coverage
 
+:white_check_mark: CI/CD
+
 :white_check_mark: Prototype Design pattern
 
 ### Future plan
-
-:ballot_box_with_check: CI/CD
 
 :ballot_box_with_check: Authentication & Authorisation
 
@@ -223,7 +166,6 @@ Use of this client library access account API, which support Create, Fetch and d
 :ballot_box_with_check: Context for godog bdd
 
 :ballot_box_with_check: Audit Trail logs
-
 
 ## Author
 [Amol Gaikwad - Linkedin](https://www.linkedin.com/in/gaikwadamolraj)
