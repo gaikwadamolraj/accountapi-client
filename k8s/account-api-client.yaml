@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-api-client
+  labels:
+    app: account-api-client
+    role: client
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: account-api-client
+      role: client
+  template:
+    metadata:
+      labels:
+        app: account-api-client
+        role: client
+    spec:
+      containers:
+        - name: account-api-client
+          image: gaikwadamolraj/account-api-client:latest
+          env:
+            - name: API_HOST
+              value: https://api.staging-form3.tech
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-api-client-service
+
+spec:
+  type: ClusterIP
+  selector:
+    app: account-api-client
+  ports:
+    - port: 8080 
+      targetPort: 8080 

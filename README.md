@@ -137,7 +137,7 @@ Use of this client library access account API, which support Create, Fetch and d
 
 :white_check_mark: Containerize Application Using Docker
 
-:white_check_mark: Unit tested
+:white_check_mark: Unit Testing
 
 :white_check_mark: Integration testing(BDD)
 
@@ -148,6 +148,8 @@ Use of this client library access account API, which support Create, Fetch and d
 :white_check_mark: Code coverage
 
 :white_check_mark: CI/CD
+
+:white_check_mark: K8s Deployment files
 
 :white_check_mark: Prototype Design pattern
 
