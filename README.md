@@ -181,10 +181,14 @@ Use of this client library access account API, which support Create, Fetch and d
 ## Screenshots
   > Added test result screenshots in /screenshots folder
   
+  ### BDD
    ![Bdd](https://github.com/gaikwadamolraj/accountapi-client/blob/main/screenshots/Bdd.png)
 
+  ### CodeCov
    ![CodCov](https://github.com/gaikwadamolraj/accountapi-client/blob/main/screenshots/Codecov.png)
 
+  ### Pact
    ![Pact](https://github.com/gaikwadamolraj/accountapi-client/blob/main/screenshots/Pact.png)
 
+  ### Security
    ![Security](https://github.com/gaikwadamolraj/accountapi-client/blob/main/screenshots/Security.png)
