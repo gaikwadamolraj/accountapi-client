@@ -40,7 +40,6 @@ Use of this client library access account API, which support Create, Fetch and d
 	accountData := model.GetAccountModel()
 
 	accountData.SetAccountID(accountId)
-	accountData.SetOrgId(utils.GetUUID())
 	accountData.SetCountry("GB")
 	accountData.SetStatus("confirmed")
 
@@ -101,7 +100,7 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
      make gobdd
      ```
-     > Need [GODOG](https://github.com/cucumber/godog) set up on local.
+     > Need [GoDog](https://github.com/cucumber/godog) set up on local.
   - ### Pact testing
      ```sh
      make gopact

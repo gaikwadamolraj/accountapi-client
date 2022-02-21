@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gaikwadamolraj/form3"
 	"github.com/gaikwadamolraj/form3/model"
@@ -16,8 +17,6 @@ func main() {
 	accountData := model.GetAccountModel()
 
 	accountData.SetAccountID(accountId)
-	accountData.SetOrgId(utils.GetUUID())
-	// accountData.SetVersion(11)
 	accountData.SetCountry("GB")
 	accountData.SetStatus("confirmed")
 
@@ -47,5 +46,5 @@ func main() {
 		log.Println(fmt.Sprintf("Account with id %s and version \"%d\" got deleted", accountId, version))
 	}
 	log.Println("---------------- Delete --------------------")
-	// http.ListenAndServe("localhost:5000", nil)
+	http.ListenAndServe("localhost:5000", nil)
 }
