@@ -17,10 +17,11 @@ jobs:
         go-version: 1.17
     - name: Install dependencies
       run: |
+        RUN export GOPATH=$HOME/go
+        RUN export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
         curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-        cd /opt
-        curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
-        export PATH=$PATH:/opt/pact/bin
+        curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh
+        export PATH=$PATH:$HOME/go/pact/bin
         go get github.com/pact-foundation/pact-go@v1
 
     - name: Test
