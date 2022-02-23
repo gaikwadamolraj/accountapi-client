@@ -40,7 +40,9 @@ jobs:
       run: docker-compose -f docker-compose.yml up -d
     
     - name: Run Bdd tests
-      run: cd integration && godog
+      run: |
+        export API_HOST=http://localhost:8080
+        cd integration && godog
     # - name: Pact - Contract test
     #   run: |
     #     echo $PATH
