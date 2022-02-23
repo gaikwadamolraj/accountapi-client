@@ -1,12 +1,13 @@
+//nolint
 package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/cucumber/godog"
 	"github.com/gaikwadamolraj/form3"
 	"github.com/gaikwadamolraj/form3/model"
-	"log"
-	"strings"
 )
 
 var response model.AccountData
@@ -87,7 +88,6 @@ func createAccountWithData(key, value string) error {
 }
 
 func validateError(err string) error {
-	log.Println("Amol is here ", errorMessage, err)
 	if false == strings.Contains(errorMessage, err) {
 		return fmt.Errorf(fmt.Sprintf("actual: %s , expected : %s", err, errorMessage))
 	}
