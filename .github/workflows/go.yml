@@ -21,14 +21,11 @@ jobs:
         export GOPATH=$HOME/go
         export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
         curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-        # curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin
-        curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-        go install github.com/pact-foundation/pact-go@v1
+        curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin
+        # curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+        # go install github.com/pact-foundation/pact-go@v1
         go install github.com/cucumber/godog/cmd/godog@v0.12.0
         go mod vendor
-
-    # - name: Run golangci-lint
-    #   run: golangci-lint run
 
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out
@@ -45,7 +42,10 @@ jobs:
         export API_HOST=http://localhost:8080
         cd integration && godog
 
-    - name: Pact - Contract test
-      run: |
-        echo $PATH
-        go test -v ./contract-testing/pact_test.go
+    # Test issue of godog if we did lint firstly
+    - name: Run golangci-lint
+      run: golangci-lint run
+    # - name: Pact - Contract test
+    #   run: |
+    #     echo $PATH
+    #     go test -v ./contract-testing/pact_test.go
