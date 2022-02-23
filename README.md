@@ -139,7 +139,7 @@ Use of this client library access account API, which support Create, Fetch and d
      ```
 ## Features
 
-:white_check_mark: Added Github action for mydevops branch
+:white_check_mark: Added Github action for push & pull request
 
 :white_check_mark: Containerize Application Using Docker
 
