@@ -22,6 +22,9 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh
         export PATH=$PATH:$HOME/go/pact/bin
+        echo $PATH
+        ls -lrt $HOME/go
+        ls -lrt $HOME/go/pact/bin/
         go get github.com/pact-foundation/pact-go@v1
         go mod vendor
 
