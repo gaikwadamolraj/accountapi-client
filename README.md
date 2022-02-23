@@ -138,6 +138,8 @@ Use of this client library access account API, which support Create, Fetch and d
 
 :white_check_mark: Containerize Application Using Docker
 
+:white_check_mark: Running unit tests, security scan and cucumber bdd from container
+
 :white_check_mark: Unit Testing
 
 :white_check_mark: Integration testing(BDD)
