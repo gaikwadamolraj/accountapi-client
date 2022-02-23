@@ -43,12 +43,15 @@ jobs:
       run: gosec -exclude-dir=vendor ./...
     
     - name: Build downstream system
-      run: docker-compose -f docker-compose.yml up -d
+      run: |
+        docker-compose -f docker-compose-test.yml down --volumes
+        docker-compose -f docker-compose.yml up -d
     
     - name: Run Bdd tests
       run: |
         export API_HOST=http://localhost:8080
         cd integration && godog
+        docker-compose -f docker-compose-test.yml down --volumes
 
     # - name: Pact - Contract test
     #   run: |
