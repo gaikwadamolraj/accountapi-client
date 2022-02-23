@@ -20,13 +20,13 @@ jobs:
         export GOPATH=$HOME/go
         export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
         curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-        curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
-        export PATH=$PATH:$PWD/pact/bin
-        echo $PATH
-        sh $PWD/pact/bin/pact-mock-service
-        # check service 
-        go install github.com/pact-foundation/pact-go@v1
-        go mod vendor
+        # curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
+        # export PATH=$PATH:$PWD/pact/bin
+        # echo $PATH
+        # sh $PWD/pact/bin/pact-mock-service
+        # # check service 
+        # go install github.com/pact-foundation/pact-go@v1
+        # go mod vendor
 
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out

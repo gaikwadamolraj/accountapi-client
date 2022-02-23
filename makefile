@@ -11,7 +11,7 @@ gomod:
 
 #  Testing
 gotest: 
-	go test -v ./...  -coverprofile=coverage.out
+	go test  ./form3/...  -coverprofile=coverage.out
 
 gobdd:
 	cd integration && godog
