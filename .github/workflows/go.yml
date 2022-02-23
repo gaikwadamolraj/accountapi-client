@@ -36,6 +36,9 @@ jobs:
     # - name: Run golangci-lint
     #   run: golangci-lint run
 
+    - name: Run Super-Linter
+      run: github/super-linter@v3
+
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out
     
