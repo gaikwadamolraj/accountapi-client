@@ -23,6 +23,7 @@ jobs:
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh
         export PATH=$PATH:$HOME/go/pact/bin
         go get github.com/pact-foundation/pact-go@v1
+        go mod vendor
 
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out
