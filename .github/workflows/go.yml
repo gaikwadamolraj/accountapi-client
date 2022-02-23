@@ -37,7 +37,7 @@ jobs:
       run: gosec -exclude-dir=vendor ./...
     
     - name: Build downstream system
-      run: docker-compose -f docker-compose.yml up --build
+      run: docker-compose -f docker-compose.yml up -d
     
     - name: Run Bdd tests
       run: cd integration && godog
