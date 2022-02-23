@@ -24,6 +24,7 @@ jobs:
         export PATH=$PATH:$PWD/pact/bin
         echo $PATH
         sh $PWD/pact/bin/pact-mock-service
+        # check service 
         go install github.com/pact-foundation/pact-go@v1
         go mod vendor
 
@@ -33,7 +34,7 @@ jobs:
     - name: Security Scan
       run: gosec -exclude-dir=vendor ./...
 
-    - name: Pact - Contract test
-      run: |
-        echo $PATH
-        go test -v ./contract-testing/pact_test.go
+    # - name: Pact - Contract test
+    #   run: |
+    #     echo $PATH
+    #     go test -v ./contract-testing/pact_test.go
