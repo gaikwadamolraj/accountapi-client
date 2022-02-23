@@ -43,9 +43,10 @@ jobs:
     # Test issue of godog if we did lint firstly
     - name: Run golangci-lint
       run: golangci-lint run
-    - name: Pact - Contract test
-      run: |
-        curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-        export PATH=$PATH:$(go env GOPATH)/pact/bin
-        go install github.com/pact-foundation/pact-go@v1
-        go test -v ./contract-testing/pact_test.go
+
+    # - name: Pact - Contract test
+    #   run: |
+    #     curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+    #     export PATH=$PATH:$(go env GOPATH)/pact/bin
+    #     go install github.com/pact-foundation/pact-go@v1
+    #     go test -v ./contract-testing/pact_test.go
