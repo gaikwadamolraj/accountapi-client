@@ -16,8 +16,5 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Build
-      run: go build -v ./...
-
     - name: Test
-      run: go test ./mo
+      run: go test ./form3/... -coverprofile=coverage.out
