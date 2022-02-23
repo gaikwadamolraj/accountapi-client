@@ -136,6 +136,8 @@ Use of this client library access account API, which support Create, Fetch and d
      ```
 ## Features
 
+:white_check_mark: Added Github action for mydevops branch
+
 :white_check_mark: Containerize Application Using Docker
 
 :white_check_mark: Running unit tests, security scan and cucumber bdd from container
@@ -180,8 +182,11 @@ Use of this client library access account API, which support Create, Fetch and d
 **I am new in GO** (Learnt basic go lang firstly and then completed assignment. Still learning process is going on)
 
 ## Screenshots
-  > Added test result screenshots in /screenshots folder
+  > Added  screenshots in /screenshots folder
   
+  ### Githubaction
+   ![GithubAction](https://github.com/gaikwadamolraj/accountapi-client/blob/main/screenshots/Gitaction.png)
+
   ### BDD
    ![Bdd](https://github.com/gaikwadamolraj/accountapi-client/blob/main/screenshots/Bdd.png)
 
