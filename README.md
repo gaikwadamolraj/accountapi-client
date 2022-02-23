@@ -2,6 +2,9 @@
 
 # Client for accountapi
 ## Project Status
+[![Go](https://github.com/gaikwadamolraj/accountapi-client/actions/workflows/go.yml/badge.svg)](https://github.com/gaikwadamolraj/accountapi-client/actions/workflows/go.yml)
+ > Github action badge for main branch
+ 
 ![Codecov](https://img.shields.io/badge/codecoverage-100%25-green)
 ![Seccan](https://img.shields.io/badge/goscan-passing-green)
 ![Bdd](https://img.shields.io/badge/bddtests-100%25-green)
