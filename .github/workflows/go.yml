@@ -49,6 +49,7 @@ jobs:
       run: |
         export API_HOST=http://localhost:8080
         cd integration && godog
+
     # - name: Pact - Contract test
     #   run: |
     #     echo $PATH
