@@ -27,14 +27,20 @@ jobs:
         # sh $PWD/pact/bin/pact-mock-service
         # # check service 
         # go install github.com/pact-foundation/pact-go@v1
-        # go mod vendor
+        go install github.com/cucumber/godog/cmd/godog@v0.12.0
+        go mod vendor
 
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out
     
     - name: Security Scan
       run: gosec -exclude-dir=vendor ./...
-
+    
+    - name: Build downstream system
+      run: docker-compose -f docker-compose.yml up --build
+    
+    - name: Run Bdd tests
+      run: cd integration && godog
     # - name: Pact - Contract test
     #   run: |
     #     echo $PATH
