@@ -38,6 +38,9 @@ jobs:
 
     - name: Run Super-Linter
       run: github/super-linter@v3
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out
