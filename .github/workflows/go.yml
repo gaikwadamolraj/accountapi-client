@@ -34,7 +34,7 @@ jobs:
     - name: Build downstream system
       run: |
         docker-compose -f docker-compose.yml up -d
-    
+ 
     - name: Run Bdd tests
       run: |
         export API_HOST=http://localhost:8080
