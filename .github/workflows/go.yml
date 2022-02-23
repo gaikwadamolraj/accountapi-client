@@ -22,6 +22,7 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
         export PATH=$PATH:$PWD/pact/bin
+        echo $PATH
         go install github.com/pact-foundation/pact-go@v1
         go mod vendor
 
@@ -32,4 +33,6 @@ jobs:
       run: gosec -exclude-dir=vendor ./...
 
     - name: Pact - Contract test
-      run: go test -v ./contract-testing/pact_test.go
+      run: |
+        echo $PWD
+        go test -v ./contract-testing/pact_test.go
