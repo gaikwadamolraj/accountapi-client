@@ -30,11 +30,11 @@ jobs:
         go install github.com/cucumber/godog/cmd/godog@v0.12.0
         go mod vendor
 
-    - name: Install golangci-lint
-      run: curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin
+    # - name: Install golangci-lint
+    #   run: curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin
 
-    - name: Run golangci-lint
-      run: golangci-lint run
+    # - name: Run golangci-lint
+    #   run: golangci-lint run
 
     - name: Test
       run: go test ./form3/... -coverprofile=coverage.out
@@ -44,14 +44,12 @@ jobs:
     
     - name: Build downstream system
       run: |
-        docker-compose -f docker-compose-test.yml down --volumes
         docker-compose -f docker-compose.yml up -d
     
     - name: Run Bdd tests
       run: |
         export API_HOST=http://localhost:8080
         cd integration && godog
-        docker-compose -f docker-compose-test.yml down --volumes
 
     # - name: Pact - Contract test
     #   run: |
