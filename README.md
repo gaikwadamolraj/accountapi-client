@@ -130,7 +130,7 @@ Use of this client library access account API, which support Create, Fetch and d
      make dcdown
      ```
    - ### Docker compose for test application
-     > #### Will test the unit tests, codecoverage, security and cucumber bdd
+     ### **Will test the unit tests, codecoverage, security and cucumber bdd**
      ```sh
       make dctestcompose
      ```
