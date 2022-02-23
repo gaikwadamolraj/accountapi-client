@@ -8,6 +8,8 @@ services:
     restart: on-failure
     depends_on:
       - accountapi
+      - postgresql
+      - vault
     environment:
       - "API_HOST=http://accountapi:8080"
   accountapi:

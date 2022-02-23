@@ -1,6 +1,19 @@
 FROM golang:1.17-alpine as builder
 
-WORKDIR /go/src/github.com/gaikwadamolraj/form3/
+RUN set -ex; \
+    apk update; \
+    apk add --no-cache \
+     ca-certificates curl build-base make bash ruby
+
+RUN export GOPATH=$HOME/go
+RUN export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Install godog
+RUN go install github.com/cucumber/godog/cmd/godog@v0.12.0
+# Gosec
+RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+
+WORKDIR /opt/app
 
 # Fetch dependencies
 COPY go.mod go.sum ./
@@ -8,8 +21,10 @@ RUN go mod download
 
 # Build
 COPY . ./
+# CMD go run ./form3-client.go
+CMD sh testing.sh
 
-CMD GOOS=linux CGO_ENABLED=0 go test ./...  -coverprofile=coverage.out
+# CMD GOOS=linux CGO_ENABLED=0 go test ./...  -coverprofile=coverage.out
 
 # # Build Go Binary
 # RUN set -ex; \

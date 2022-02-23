@@ -100,7 +100,6 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
      make gobdd
      ```
-     > Need [GoDog](https://github.com/cucumber/godog) set up on local.
   - ### Pact testing
      ```sh
      make gopact
@@ -115,9 +114,8 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
       make gosecurityscan
      ```
-     > Need [Gosec](https://github.com/securego/gosec) set up on local.
 ## Docker Lifecycle
-   - ### Docker Compose ups
+   - ### Docker Compose up
      ```sh
       make dcup
      ```
@@ -132,6 +130,7 @@ Use of this client library access account API, which support Create, Fetch and d
      make dcdown
      ```
    - ### Docker compose for test application
+     > #### Will test the unit tests, codecoverage, security and cucumber bdd
      ```sh
       make dctestcompose
      ```

@@ -1,0 +1,1 @@
+gosec -exclude-dir=vendor ./...  && cd integration  && godog && cd ../form3 && go test ./... -coverprofile=coverage.out
