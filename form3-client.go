@@ -52,5 +52,4 @@ func main() {
 		}
 	}
 	log.Println("---------------- Delete --------------------")
-	http.ListenAndServe("localhost:1000", nil)
 }

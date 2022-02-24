@@ -1,1 +1,1 @@
-go test -v ./contract-testing/pact_test.go
+gosec -exclude-dir=vendor ./...  && cd integration  && godog && cd ../form3 && go test ./... -coverprofile=coverage.out
