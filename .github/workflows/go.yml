@@ -30,10 +30,12 @@ jobs:
     
     - name: Build downstream system
       run: |
-        docker-compose -f docker-compose.yml up -d
+        docker-compose -f docker-compose-github.yml up -d
  
     - name: Unit Tests
-      run: go test ./form3/... -coverprofile=coverage.out
+      run: |
+        export API_HOST="http://localhost:8080"
+        go test ./form3/... -coverprofile=coverage.out
 
     - name: Bdd Cucumber tests
       run: |
@@ -52,7 +54,6 @@ jobs:
         cd $GOPATH
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
         export PATH=$PATH:$GOPATH/pact/bin
-        go get github.com/pact-foundation/pact-go@v1
         go install github.com/pact-foundation/pact-go@v1
         cd $cwd
         go test -v ./contract-testing/pact_test.go

@@ -24,6 +24,13 @@ To run this app, you'll need:
 ## ****##Check [Github actions](https://github.com/gaikwadamolraj/accountapi-client/actions) workflow  - unit tests, BDD, gosec, lint and pact(contract) testing##****
 
 
+## Use below command for testing docker-compose  ##
+```sh
+docker-compose up --build
+```
+
+
+
 ## How to use  ##
  - Instructions
 Use of this client library access account API, which support Create, Fetch and delete methood. Please refer to the
