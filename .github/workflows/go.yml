@@ -30,7 +30,7 @@ jobs:
     
     - name: Build downstream system
       run: |
-        docker-compose -f docker-compose.yml up accountapi postgresql vault -d
+        docker-compose -f docker-compose-github.yml up -d
  
     - name: Unit Tests
       run: |
