@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"testing"
 
 	"github.com/gaikwadamolraj/form3/model"
@@ -12,6 +13,7 @@ import (
 )
 
 func TestCreateFailures(t *testing.T) {
+	os.Setenv("API_HOST", "http://localhost:8080")
 	accountId := "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
 	ctx := context.Background()
 	var errorRes model.ErrorResponse
@@ -38,6 +40,7 @@ func TestCreateFailures(t *testing.T) {
 	assert.Equal(t, http.StatusConflict, res.StatusCode, "Conflict for create same account")
 }
 func TestFetchById(t *testing.T) {
+	os.Setenv("API_HOST", "http://localhost:8080")
 	accountId := "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
 
 	ctx := context.Background()
@@ -69,6 +72,7 @@ func createNewRecord(accountId string) {
 }
 
 func TestDeleteByIdAndVer(t *testing.T) {
+	os.Setenv("API_HOST", "http://localhost:8080")
 	accountId := "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
 
 	ctx := context.Background()
