@@ -13,11 +13,16 @@
 
  > These badges are as per local run
 
+
 ## This go client is created for accountapi.
 
 To run this app, you'll need:
+```
+ - Go 1.17
+```
 
-- Go 1.17
+## ****##Check [Github actions](https://github.com/gaikwadamolraj/accountapi-client/actions) workflow  - unit tests, BDD, gosec, lint and pact(contract) testing##****
+
 
 ## How to use  ##
  - Instructions
