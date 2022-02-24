@@ -120,7 +120,7 @@ Use of this client library access account API, which support Create, Fetch and d
      ```sh
      make gopact
      ```
-     > Need [Pact](https://github.com/pact-foundation/pact-go) set up on local.
+     > Check [Github actions](https://github.com/gaikwadamolraj/accountapi-client/actions) workflow for pact
    - ### Code coverage
      ```sh
      make gocodecov
