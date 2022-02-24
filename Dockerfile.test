@@ -5,13 +5,18 @@ RUN set -ex; \
     apk add --no-cache \
      ca-certificates curl build-base make bash ruby
 
-RUN export GOPATH=$HOME/go
-RUN export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+ENV  GOPATH=$HOME/go
+ENV  PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Install godog
 RUN go install github.com/cucumber/godog/cmd/godog@v0.12.0
 # Gosec
 RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+
+# Pact
+RUN curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh -s -- -b $(go env GOPATH)
+ENV PATH=$PATH:$GOPATH/pact/bin
+RUN go install github.com/pact-foundation/pact-go@v1
 
 WORKDIR /opt/app
 
@@ -21,8 +26,8 @@ RUN go mod download
 
 # Build
 COPY . ./
-# CMD go run ./form3-client.go
-CMD sh testing.sh
+CMD go run ./form3-client.go
+# CMD sh testing.sh
 
 # CMD GOOS=linux CGO_ENABLED=0 go test ./...  -coverprofile=coverage.out
 

@@ -1,7 +1,8 @@
 package main
 
 import (
-	"errors"
+	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -13,6 +14,8 @@ import (
 	"net/http"
 	"testing"
 )
+
+var ctx = context.Background()
 
 type AccountClientSuite struct {
 	suite.Suite
@@ -70,6 +73,28 @@ type Data struct {
 	Data AccountData `json:"data,omitempty"`
 }
 
+func GetParsedErrorMsg(res *http.Response) string {
+	var errorRes model.ErrorResponse
+	_ = json.NewDecoder(res.Body).Decode(&errorRes)
+	return errorRes.ErrMessage
+}
+
+func GetJsonRes(res *http.Response, mapRes *model.AccountData) {
+	response := model.Data{
+		Data: mapRes,
+	}
+
+	_ = json.NewDecoder(res.Body).Decode(&response)
+}
+
+func validateAssert(res *http.Response, expectedError string, expectedStatusCode int) error {
+	actualErrorMsg := GetParsedErrorMsg(res)
+	if actualErrorMsg != expectedError {
+		return fmt.Errorf("Expected  \"%s\" but got %s and statusCode %d but got %d", expectedError, actualErrorMsg, expectedStatusCode, res.StatusCode)
+	}
+
+	return nil
+}
 func (s *AccountClientSuite) TestGetAccountThatDoesNotExist() {
 	pact.AddInteraction().
 		Given("Accound id  ad27e265-9605-4b4b-a0e5-3003ea9cc99c is not available").
@@ -88,10 +113,11 @@ func (s *AccountClientSuite) TestGetAccountThatDoesNotExist() {
 
 	test := func() error {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
-		_, err := form3.FetchById("ad27e265-9605-4b4b-a0e5-3003ea9cc99c")
 
-		if err.Error() != "Unknown error, status code: 404" {
-			return errors.New("error returned not as expected")
+		res, _ := form3.FetchById(ctx, "ad27e265-9605-4b4b-a0e5-3003ea9cc99c")
+
+		if res.StatusCode != http.StatusNotFound {
+			return fmt.Errorf("Expected 404 but got %d", res.StatusCode)
 		}
 
 		return nil
@@ -119,10 +145,9 @@ func (s *AccountClientSuite) TestGetAccountThatExist() {
 
 	test := func() error {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
-		acc, err := form3.FetchById("ad27e265-9605-4b4b-a0e5-3003ea9cc99a")
+		response, _ := form3.FetchById(ctx, "ad27e265-9605-4b4b-a0e5-3003ea9cc99a")
 
-		s.NoError(err)
-		s.Equal("ad27e265-9605-4b4b-a0e5-3003ea9cc99a", acc.GetAccountID())
+		s.Equal(http.StatusOK, response.StatusCode)
 
 		return nil
 	}
@@ -149,9 +174,10 @@ func (s *AccountClientSuite) TestCreateAccount() {
 
 	test := func() error {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
-		acc, err := form3.Create(model.GetAccountModel())
+		response, _ := form3.Create(ctx, model.GetAccountModel())
+		acc := model.AccountData{}
+		GetJsonRes(response, &acc)
 
-		s.NoError(err)
 		s.Equal("ad27e265-9605-4b4b-a0e5-3003ea9cc99a", acc.GetAccountID())
 		s.Equal("pending", acc.GetStatus())
 
@@ -185,13 +211,9 @@ func (s *AccountClientSuite) TestCreateAccountIdValidation() {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
 		acc := model.GetAccountModel()
 		acc.SetAccountID("123")
-		_, err := form3.Create(acc)
+		res, _ := form3.Create(ctx, acc)
 
-		if err.Error() != "id in body must be of type uuid" {
-			return errors.New("error returned not as expected")
-		}
-
-		return nil
+		return validateAssert(res, "id in body must be of type uuid", 400)
 	}
 
 	s.NoError(pact.Verify(test))
@@ -221,13 +243,9 @@ func (s *AccountClientSuite) TestCreateAccountStatusValidation() {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
 		acc := model.GetAccountModel()
 		acc.SetAccountID("123")
-		_, err := form3.Create(acc)
+		res, _ := form3.Create(ctx, acc)
 
-		if err.Error() != "status in body should be one of [pending confirmed failed]" {
-			return errors.New("error returned not as expected")
-		}
-
-		return nil
+		return validateAssert(res, "status in body should be one of [pending confirmed failed]", 400)
 	}
 
 	s.NoError(pact.Verify(test))
@@ -256,13 +274,9 @@ func (s *AccountClientSuite) TestCreateAccountDuplicateAccount() {
 	test := func() error {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
 		acc := model.GetAccountModel()
-		_, err := form3.Create(acc)
+		res, _ := form3.Create(ctx, acc)
 
-		if err.Error() != "Account cannot be created as it violates a duplicate constraint" {
-			return errors.New("error returned not as expected")
-		}
-
-		return nil
+		return validateAssert(res, "Account cannot be created as it violates a duplicate constraint", 429)
 	}
 
 	s.NoError(pact.Verify(test))
@@ -292,13 +306,9 @@ func (s *AccountClientSuite) TestDeleteAccountInvalidVersion() {
 	test := func() error {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
 
-		err := form3.DeleteByIdAndVer("ad27e265-9605-4b4b-a0e5-3003ea9cc9ac", 123)
+		res, _ := form3.DeleteByIdAndVer(ctx, "ad27e265-9605-4b4b-a0e5-3003ea9cc9ac", 123)
 
-		if err.Error() != "invalid version" {
-			return errors.New("error returned not as expected")
-		}
-
-		return nil
+		return validateAssert(res, "invalid version", 429)
 	}
 
 	s.NoError(pact.Verify(test))
@@ -324,10 +334,10 @@ func (s *AccountClientSuite) TestDeleteAccountSuccess() {
 	test := func() error {
 		os.Setenv("API_HOST", fmt.Sprintf("http://localhost:%d", pact.Server.Port))
 
-		err := form3.DeleteByIdAndVer("ad27e265-9605-4b4b-a0e5-3003ea9cc9mc", 123)
+		res, _ := form3.DeleteByIdAndVer(ctx, "ad27e265-9605-4b4b-a0e5-3003ea9cc9mc", 123)
 
-		if err != nil {
-			return errors.New("error returned not as expected")
+		if res.StatusCode != http.StatusNoContent {
+			return fmt.Errorf("Expected status code %d but got  %d", http.StatusNoContent, res.StatusCode)
 		}
 
 		return nil
@@ -336,4 +346,4 @@ func (s *AccountClientSuite) TestDeleteAccountSuccess() {
 	s.NoError(pact.Verify(test))
 }
 
-// Will merge BDD (cucumber) testing with pact.
+// Merge pact with Bdd

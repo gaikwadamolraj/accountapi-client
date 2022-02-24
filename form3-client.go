@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gaikwadamolraj/form3"
 	"github.com/gaikwadamolraj/form3/model"
@@ -10,6 +12,7 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
 	accountId := utils.GetUUID()
 	version := 0
 
@@ -20,29 +23,34 @@ func main() {
 	accountData.SetStatus("confirmed")
 
 	log.Println("---------------- create --------------------")
-	createResp, err := form3.Create(accountData)
+	response, err := form3.Create(ctx, accountData)
 	if err != nil {
 		log.Println(err)
 	} else {
-		log.Printf("AcoountId %s with status \"%s\"", createResp.GetAccountID(), createResp.GetStatus())
+		log.Printf("Acoounts Fetched sucessfully  %s", response.Status)
 	}
 	log.Println("---------------- create --------------------")
 
 	log.Println("---------------- Fetch ---------------------")
-	response, err := form3.FetchById(accountId)
+	response, err = form3.FetchById(ctx, accountId)
 	if err != nil {
 		log.Println(err)
 	} else {
-		log.Printf("Account found with ID %s", response.ID)
+		log.Printf("Acoounts Fetched sucessfully %s", response.Status)
 	}
 	log.Println("---------------- Fetch ---------------------")
 	log.Println("---------------- Delete --------------------")
 
-	err = form3.DeleteByIdAndVer(accountId, version)
+	response, err = form3.DeleteByIdAndVer(ctx, accountId, version)
 	if err != nil {
 		log.Println(err)
 	} else {
-		log.Println(fmt.Sprintf("Account with id %s and version \"%d\" got deleted", accountId, version))
+		if response.StatusCode == http.StatusNoContent {
+			log.Printf("Account deleted %s", response.Status)
+		} else {
+			log.Println(fmt.Sprintf("Some error got while deleting accout %d", response.StatusCode))
+		}
 	}
 	log.Println("---------------- Delete --------------------")
+	http.ListenAndServe("localhost:1000", nil)
 }

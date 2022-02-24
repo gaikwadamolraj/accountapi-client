@@ -20,7 +20,7 @@ gopact:
 	go test -v ./contract-testing/pact_test.go
 
 # Scan
-gosecurityscan:
+gosec:
 	gosec -exclude-dir=vendor ./...
 
 gocodecov:

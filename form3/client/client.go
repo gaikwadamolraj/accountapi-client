@@ -4,9 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"errors"
-	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"time"
@@ -42,32 +39,4 @@ func (c *Client) NewRequestWithContext(ctx context.Context, httpMethod string, r
 	}
 
 	return http.NewRequestWithContext(ctx, httpMethod, url.String(), buf)
-}
-
-func (c *Client) SendRequest(req *http.Request, mapRes interface{}) error {
-	res, err := c.HttpClient.Do(req)
-	if err != nil {
-		return err
-	}
-
-	log.Printf("%d | %s - \"%s\" ", res.StatusCode, req.Method, req.URL)
-	defer res.Body.Close()
-
-	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
-		var errRes model.ErrorResponse
-		if err = json.NewDecoder(res.Body).Decode(&errRes); err == nil {
-			return errors.New(errRes.ErrMessage)
-		}
-		return fmt.Errorf(fmt.Sprintf("Unknown error, status code: %d", res.StatusCode))
-	}
-
-	if mapRes != nil || mapRes == "" {
-		response := model.Data{
-			Data: mapRes,
-		}
-
-		return json.NewDecoder(res.Body).Decode(&response)
-	}
-
-	return nil
 }

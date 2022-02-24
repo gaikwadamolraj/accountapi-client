@@ -116,7 +116,7 @@ Use of this client library access account API, which support Create, Fetch and d
 
    - ### Security Scan
      ```sh
-      make gosecurityscan
+      make gosec
      ```
 ## Docker Lifecycle
    - ### Docker Compose up
