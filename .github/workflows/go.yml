@@ -25,28 +25,32 @@ jobs:
         go install github.com/cucumber/godog/cmd/godog@v0.12.0
         go mod vendor
     
-    - name: Security Scan
-      run: gosec -exclude-dir=vendor ./...
+    # - name: Security Scan
+    #   run: gosec -exclude-dir=vendor ./...
     
-    - name: Build downstream system
-      run: |
-        docker-compose -f docker-compose.yml up -d
+    # - name: Build downstream system
+    #   run: |
+    #     docker-compose -f docker-compose.yml up -d
  
-    - name: Test
-      run: go test ./form3/... -coverprofile=coverage.out
+    # - name: Test
+    #   run: go test ./form3/... -coverprofile=coverage.out
 
-    - name: Run Bdd tests
-      run: |
-        export API_HOST=http://localhost:8080
-        cd integration && godog
+    # - name: Run Bdd tests
+    #   run: |
+    #     export API_HOST=http://localhost:8080
+    #     cd integration && godog
 
-    # Test issue of godog if we did lint firstly
-    - name: Run golangci-lint
-      run: golangci-lint run
+    # # Test issue of godog if we did lint firstly
+    # - name: Run golangci-lint
+    #   run: golangci-lint run
 
     - name: Pact - Contract test
       run: |
+        export GOPATH=$HOME/go
+        export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | sh -s -- -b $(go env GOPATH)
         export PATH=$PATH:$(go env GOPATH)/pact/bin
+        echo $PATH 
+        ls -lrt $HOME/go/pact/bin
         go install github.com/pact-foundation/pact-go@v1
         go test -v ./contract-testing/pact_test.go
