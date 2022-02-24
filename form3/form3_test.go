@@ -3,9 +3,7 @@ package form3
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"net/http"
-	"os"
 	"testing"
 
 	"github.com/gaikwadamolraj/form3/model"
@@ -13,8 +11,8 @@ import (
 )
 
 func TestCreateFailures(t *testing.T) {
-	os.Setenv("API_HOST", "http://localhost:8080")
 	accountId := "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
+	deleteActiveRecord(accountId)
 	ctx := context.Background()
 	var errorRes model.ErrorResponse
 
@@ -36,11 +34,11 @@ func TestCreateFailures(t *testing.T) {
 	assert.Equal(t, http.StatusCreated, res.StatusCode, "Success test with account creation")
 
 	//Duplicate error
+	accountData.SetAccountID(accountId)
 	res, _ = Create(ctx, accountData)
 	assert.Equal(t, http.StatusConflict, res.StatusCode, "Conflict for create same account")
 }
 func TestFetchById(t *testing.T) {
-	os.Setenv("API_HOST", "http://localhost:8080")
 	accountId := "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
 
 	ctx := context.Background()
@@ -55,7 +53,6 @@ func TestFetchById(t *testing.T) {
 
 	// //AccountId is mandatory
 	_, err := FetchById(ctx, "")
-	log.Println("err ", err)
 	assert.Equal(t, err.Error(), "accountID is mandatory", "Account Id is required")
 }
 
@@ -72,7 +69,6 @@ func createNewRecord(accountId string) {
 }
 
 func TestDeleteByIdAndVer(t *testing.T) {
-	os.Setenv("API_HOST", "http://localhost:8080")
 	accountId := "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
 
 	ctx := context.Background()
