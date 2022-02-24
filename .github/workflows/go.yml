@@ -48,7 +48,7 @@ jobs:
       run: |
         export GOPATH=$HOME/go
         export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-        projPath = $PWD
+        cwd=$(pwd)
         cd $HOME
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
         export PATH=$PATH:$HOME/pact/bin
@@ -56,5 +56,5 @@ jobs:
         echo $PATH
         go install github.com/pact-foundation/pact-go@v1
         pact help
-        cd $projPath
+        cd $cwd
         go test -v ./contract-testing/pact_test.go
