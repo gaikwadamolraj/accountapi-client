@@ -49,9 +49,9 @@ jobs:
         export GOPATH=$HOME/go
         export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
         cwd=$(pwd)
-        cd $HOME
+        cd $GOPATH
         curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
-        export PATH=$PATH:$HOME/pact/bin
+        export PATH=$PATH:$GOPATH/pact/bin
         go get github.com/pact-foundation/pact-go@v1
         echo $PATH
         go install github.com/pact-foundation/pact-go@v1
