@@ -2,7 +2,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,13 +9,12 @@ import (
 	"strings"
 
 	"github.com/cucumber/godog"
-	"github.com/gaikwadamolraj/form3"
 	"github.com/gaikwadamolraj/form3/model"
+	"github.com/gaikwadamolraj/testutils"
 )
 
 var response *http.Response
 var errorMessage string
-var ctx = context.Background()
 
 //  Util functions
 func GetParsedErrorMsg(res *http.Response) string {
@@ -34,7 +32,7 @@ func GetJsonRes(res *http.Response, mapRes *model.AccountData) {
 }
 
 func GetAccount(accountId string) error {
-	res, err := form3.FetchById(ctx, accountId)
+	res, err := testutils.FetRecord(accountId)
 	response = res
 	if err != nil {
 		return fmt.Errorf("%s account not found", accountId)
@@ -44,7 +42,7 @@ func GetAccount(accountId string) error {
 }
 
 func GetAccountWithError(accountId string) error {
-	res, err := form3.FetchById(ctx, accountId)
+	res, err := testutils.FetRecord(accountId)
 	response = res
 	if err != nil {
 		errorMessage = GetParsedErrorMsg(res)
@@ -73,7 +71,7 @@ func createAccount(accountId, status string) error {
 	accountData.SetAccountID(accountId)
 	accountData.SetStatus(status)
 
-	res, _ := form3.Create(ctx, accountData)
+	res, _ := testutils.CreateAccount(accountData)
 	response = res
 	if res.StatusCode != http.StatusCreated {
 		return fmt.Errorf("Got error while creating account")
@@ -82,7 +80,7 @@ func createAccount(accountId, status string) error {
 }
 
 func deleteAccount(accountId string, version int, validation string) error {
-	res, _ := form3.DeleteByIdAndVer(ctx, accountId, version)
+	res, _ := testutils.DeleteRecord(accountId, version)
 	response = res
 	if res.StatusCode != http.StatusNoContent {
 		if validation == "false" {
@@ -109,7 +107,7 @@ func createAccountWithData(key, value string) error {
 		accountData.SetCountry(value)
 	}
 
-	res, _ := form3.Create(ctx, accountData)
+	res, _ := testutils.CreateAccount(accountData)
 	response = res
 	if res.StatusCode != http.StatusCreated {
 		errorMessage = GetParsedErrorMsg(res)
