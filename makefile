@@ -20,6 +20,9 @@ gopact:
 	go test -v ./contract-testing/pact_test.go
 
 # Scan
+golint:
+	golangci-lint run
+
 gosec:
 	gosec -exclude-dir=vendor ./...
 
@@ -41,13 +44,13 @@ goprodrun:
 
 # Docker compose 
 dcup:
-	docker-compose -f docker-compose.yml up --build
+	docker-compose -f docker-compose-github.yml up --build
 
 dcstop:
-	docker-compose -f docker-compose.yml stop
+	docker-compose -f docker-compose-github.yml stop
 
 dcdown:
-	docker-compose -f docker-compose.yml down
+	docker-compose -f docker-compose-github.yml down
 
 # Docker test compose 
 dctestcompose:
