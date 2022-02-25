@@ -168,6 +168,8 @@ Use of this client library access account API, which support Create, Fetch and d
 
 :white_check_mark: Code coverage
 
+:white_check_mark: Go lint
+
 :white_check_mark: CI/CD
 
 :white_check_mark: K8s Deployment files
