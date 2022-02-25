@@ -1,4 +1,4 @@
-name: Account CI
+name: CI - Client AccountApi
 
 on:
   push:
